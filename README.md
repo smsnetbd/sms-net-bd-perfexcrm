@@ -66,7 +66,15 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
    - Add or select your approved Sender ID.
    - Select at a time one Sender ID in the module settings.
 
-### 3. Log Sent Messages
+### 3. Test Mode Selection
+   
+   - The module allows testing SMS sending before going live.
+   - Enable or disable **Test Mode** by selecting `Yes` or `No`.
+   - In test mode, SMS will be sent but logged for testing purposes.
+
+   ![sms.net.bd + Perfex CRM](./assets/img/screenshot4.png)
+
+### 4. Log Sent Messages
    
    - This module includes an option to log all sent messages.
    - Enable or disable the **Log Sent Messages** option by selecting `Yes` or `No` in the module settings.
@@ -75,14 +83,6 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
    ![sms.net.bd + Perfex CRM](./assets/img/screenshot5.png)
 
    ![sms.net.bd + Perfex CRM](./assets/img/screenshot6.png)
-
-### 4. Test Mode Selection
-   
-   - The module allows testing SMS sending before going live.
-   - Enable or disable **Test Mode** by selecting `Yes` or `No`.
-   - In test mode, SMS will be sent but logged for testing purposes.
-
-   ![sms.net.bd + Perfex CRM](./assets/img/screenshot4.png)
 
 ## Troubleshooting
 

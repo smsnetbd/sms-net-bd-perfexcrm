@@ -84,6 +84,7 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
    - The module allows testing SMS sending before going live.
    - Enable or disable **Test Mode** by selecting `Yes` or `No`.
    - In test mode, SMS will be sent but logged for testing purposes.
+   - Important: Before going live, make sure Test Mode is disabled (set to "No") to allow actual SMS delivery.
 
    ![sms.net.bd + Perfex CRM](./assets/img/screenshot4.png)
 

@@ -12,6 +12,7 @@ $lang['smsapi_servis_label'] = 'SMSAPI Service';
 
 $lang['smsapi_sender_id_label'] = 'Sender ID';
 $lang['smsapi_balance_label'] = 'Balance';
+$lang['no_sender_id'] = 'No sender ID';
 
 $lang['smsapi_servis_option_pl'] = 'Poland %s';
 $lang['smsapi_servis_option_com'] = 'Global %s';

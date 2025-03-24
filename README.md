@@ -46,7 +46,9 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
    - You can now start sending SMS notifications from Perfex CRM.
 
 ![SMS.net.bd + Perfex CRM](./assets/img/screenshot1.png) 
+
 ![SMS.net.bd + Perfex CRM](./assets/img/screenshot2.png)
+
 ![SMS.net.bd + Perfex CRM](./assets/img/screenshot3.png)
 
 ## Additional Configuration
@@ -69,7 +71,9 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
    - This module includes an option to log all sent messages.
    - Enable or disable the **Log Sent Messages** option by selecting `Yes` or `No` in the module settings.
    - When enabled, sent messages will be recorded for tracking purposes.
+
    ![SMS.net.bd + Perfex CRM](./assets/img/screenshot5.png)
+
    ![SMS.net.bd + Perfex CRM](./assets/img/screenshot6.png)
 
 ### 4. Test Mode Selection

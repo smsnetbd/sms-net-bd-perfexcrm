@@ -45,9 +45,9 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
    
    - You can now start sending SMS notifications from Perfex CRM.
 
-![SMS.net.bd + Perfex CRM](./assets/img/screnshort1.png)
-![SMS.net.bd + Perfex CRM](./assets/img/screnshort2.png)
-![SMS.net.bd + Perfex CRM](./assets/img/screnshort3.png)
+![SMS.net.bd + Perfex CRM](./assets/img/screenshot1.png)
+![SMS.net.bd + Perfex CRM](./assets/img/screenshot2.png)
+![SMS.net.bd + Perfex CRM](./assets/img/screenshot3.png)
 
 ## Additional Configuration
 

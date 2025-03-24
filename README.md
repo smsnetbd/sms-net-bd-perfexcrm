@@ -76,6 +76,8 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
    - Enable or disable **Test Mode** by selecting `Yes` or `No`.
    - In test mode, SMS will be sent but logged for testing purposes.
 
+   ![SMS.net.bd + Perfex CRM](./assets/img/screenshot4.png)
+
 ## Troubleshooting
 
 If you encounter any issues during installation or usage, please check the following:

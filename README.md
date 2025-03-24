@@ -1,6 +1,6 @@
 # SMS.net.bd Module for Perfex CRM
 
-![SMS.net.bd + Perfex CRM](./assets/img/sms-net-bd-logo.png)
+![sms.net.bd + Perfex CRM](./assets/img/sms-net-bd-logo.png)
 
 Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to send SMS notifications, check balance, retrieve delivery reports, and manage SMS seamlessly.
 
@@ -45,11 +45,11 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
    
    - You can now start sending SMS notifications from Perfex CRM.
 
-![SMS.net.bd + Perfex CRM](./assets/img/screenshot1.png) 
+![sms.net.bd + Perfex CRM](./assets/img/screenshot1.png) 
 
-![SMS.net.bd + Perfex CRM](./assets/img/screenshot2.png)
+![sms.net.bd + Perfex CRM](./assets/img/screenshot2.png)
 
-![SMS.net.bd + Perfex CRM](./assets/img/screenshot3.png)
+![sms.net.bd + Perfex CRM](./assets/img/screenshot3.png)
 
 ## Additional Configuration
 
@@ -72,9 +72,9 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
    - Enable or disable the **Log Sent Messages** option by selecting `Yes` or `No` in the module settings.
    - When enabled, sent messages will be recorded for tracking purposes.
 
-   ![SMS.net.bd + Perfex CRM](./assets/img/screenshot5.png)
+   ![sms.net.bd + Perfex CRM](./assets/img/screenshot5.png)
 
-   ![SMS.net.bd + Perfex CRM](./assets/img/screenshot6.png)
+   ![sms.net.bd + Perfex CRM](./assets/img/screenshot6.png)
 
 ### 4. Test Mode Selection
    
@@ -82,7 +82,7 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
    - Enable or disable **Test Mode** by selecting `Yes` or `No`.
    - In test mode, SMS will be sent but logged for testing purposes.
 
-   ![SMS.net.bd + Perfex CRM](./assets/img/screenshot4.png)
+   ![sms.net.bd + Perfex CRM](./assets/img/screenshot4.png)
 
 ## Troubleshooting
 

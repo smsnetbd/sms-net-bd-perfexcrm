@@ -14,7 +14,7 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
 - Log sent messages for tracking  
 
 ## Prerequisites
-- Perfex CRM Version 3.2.1
+- Perfex CRM Version greater than 3.2.1
 - SMS.net.bd module version 1.0.1
 - An account on **[sms.net.bd](https://sms.net.bd/signup)**
 
@@ -38,12 +38,16 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
 
 4. **Configure the Module**
    
-   - Once activated, navigate to `Setup` > `Settings` > `SMS` > `sms.net.bd`.
+   - Once activated, navigate to `Setup` > `Settings` > `SMS` > `SMSAPI`.
    - Enter your API Key and configure the settings as needed.
 
 5. **Start Using the Module**
    
    - You can now start sending SMS notifications from Perfex CRM.
+
+![SMS.net.bd + Perfex CRM](./assets/img/screnshort1.png)
+![SMS.net.bd + Perfex CRM](./assets/img/screnshort2.png)
+![SMS.net.bd + Perfex CRM](./assets/img/screnshort3.png)
 
 ## Additional Configuration
 
@@ -53,7 +57,7 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
    - Navigate to `API Menu` > `+ Generate API KAY`.
    - Copy the generated token and paste it into the **API Key** field in the module settings.
 
-### 2. Sender ID Configuration
+### 2. Sender ID Configuration (Optional)
    
    - Log in to your **sms.net.bd** account.
    - Navigate to `Messaging` > `Create Sender ID`.

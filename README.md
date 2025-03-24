@@ -50,6 +50,8 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
 
    ![sms.net.bd + Perfex CRM](./assets/img/screenshot1.png) 
 
+   ![sms.net.bd + Perfex CRM](./assets/img/screenshot2.png)
+
 4. **Configure the Module**
    
    - Once activated, navigate to `Setup` > `Settings` > `SMS` > `SMSAPI`.
@@ -60,11 +62,6 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
 5. **Start Using the Module**
    
    - You can now start sending SMS notifications from Perfex CRM.
-
-
-
-![sms.net.bd + Perfex CRM](./assets/img/screenshot2.png)
-
 
 
 ## Additional Configuration

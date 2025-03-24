@@ -12,6 +12,18 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
 - Easy configuration with API Key  
 - Enable or disable Test Mode  
 - Log sent messages for tracking  
+- Invoice Overdue Notice: Trigger when invoice overdue notice is sent to customer contacts.
+- Invoice Due Notice: Trigger when invoice due notice is sent to customer contacts.
+- Invoice Payment Recorded: Trigger when invoice payment is recorded.
+- Estimate Expiration Reminder: Trigger when expiration reminder should be send to customer contacts.
+- Proposal Expiration Reminder: Trigger when expiration reminder should be send to proposal.
+- New Comment on Proposal (to customer): Trigger when staff member comments on proposal, SMS will be sent to proposal number (customer/lead).
+- New Comment on Proposal (to staff): Trigger when customer/lead comments on proposal, SMS will be sent to proposal creator and assigned staff member.
+- New Comment on Contract (to customer): Trigger when staff member add comment to contract, SMS will be sent customer contacts.
+- New Comment on Contract (to staff): Trigger when customer add comment to contract, SMS will be sent to contract creator.
+- Contract Expiration Reminder: Trigger when expiration reminder should be send via Cron Job to customer contacts.
+- Contract Sign Reminder: Trigger when the contract is first time sent to the customer and automatically stopped when the contract is signed.
+- Staff Reminder: Trigger when staff is notified for a specific custom reminder.
 
 ## Prerequisites
 - Perfex CRM Version greater than 3.2.1
@@ -36,20 +48,24 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
    - After uploading, find the module in the list of available modules.
    - Click on the `Activate` button next to the module.
 
+   ![sms.net.bd + Perfex CRM](./assets/img/screenshot1.png) 
+
 4. **Configure the Module**
    
    - Once activated, navigate to `Setup` > `Settings` > `SMS` > `SMSAPI`.
    - Enter your API Key and configure the settings as needed.
 
+   ![sms.net.bd + Perfex CRM](./assets/img/screenshot3.png)
+
 5. **Start Using the Module**
    
    - You can now start sending SMS notifications from Perfex CRM.
 
-![sms.net.bd + Perfex CRM](./assets/img/screenshot1.png) 
+
 
 ![sms.net.bd + Perfex CRM](./assets/img/screenshot2.png)
 
-![sms.net.bd + Perfex CRM](./assets/img/screenshot3.png)
+
 
 ## Additional Configuration
 

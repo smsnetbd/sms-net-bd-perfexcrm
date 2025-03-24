@@ -33,7 +33,7 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
 ## Installation Instructions
 
 ### 1. Download the Latest Release
-Download the `smsnetbd.zip` file from the official **[releases](https://github.com/smsnetbd/sms-net-bd-perfexcrm/releases)** module repository.
+Download the `smsnetbd.zip` file from the official **[sms.net.bd Releases](https://github.com/smsnetbd/sms-net-bd-perfexcrm/releases)** repository.
 
 ### 2. Upload the Module
 1. Log in to your **Perfex CRM Admin Panel**.

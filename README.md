@@ -8,7 +8,6 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
 - Send SMS directly from Perfex CRM  
 - Check SMS balance  
 - Retrieve delivery reports  
-- Secure API-based communication  
 - Easy configuration with API Key  
 - Enable or disable Test Mode  
 - Log sent messages for tracking  
@@ -34,7 +33,7 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
 ## Installation Instructions
 
 ### 1. Download the Latest Release
-Download the `smsnetbd.zip` file from the official **sms.net.bd** module repository.
+Download the `smsnetbd.zip` file from the official **[releases](https://github.com/smsnetbd/sms-net-bd-perfexcrm/releases)** module repository.
 
 ### 2. Upload the Module
 1. Log in to your **Perfex CRM Admin Panel**.

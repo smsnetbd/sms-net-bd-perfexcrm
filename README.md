@@ -61,12 +61,12 @@ You can now send SMS notifications from Perfex CRM.
 ## Additional Configuration
 
 ### 1. API Key Setup
-1. Log in to **sms.net.bd**.
+1. Log in to **[sms.net.bd](https://portal.sms.net.bd/login)**.
 2. Navigate to **API Menu** > **+ Generate API Key**.
 3. Copy the generated token and paste it into the **API Key** field in the module settings.
 
 ### 2. Sender ID Configuration (Optional)
-1. Log in to **sms.net.bd**.
+1. Log in to **[sms.net.bd](https://portal.sms.net.bd/login)**.
 2. Navigate to **Messaging** > **Create Sender ID**.
 3. Add or select an approved **Sender ID**.
 4. Choose **one** Sender ID in the module settings.

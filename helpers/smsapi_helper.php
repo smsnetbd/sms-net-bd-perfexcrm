@@ -10,7 +10,7 @@ function get_smsapi_latest_status_name($ms_id)
 {
     $CI =& get_instance();
     $CI->db->select('status_name');
-    $CI->db->from(db_prefix() . ALPHASMS_MODULE_NAME . '_report');
+    $CI->db->from(db_prefix() . SMSAPI_MODULE_NAME . '_report');
     $CI->db->where('MsgId', $ms_id);
     $CI->db->order_by('id', 'DESC');
     $CI->db->limit(1);

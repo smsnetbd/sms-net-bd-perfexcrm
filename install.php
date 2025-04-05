@@ -1,9 +1,12 @@
 <?php
 
+
 defined('BASEPATH') || exit('No direct script access allowed');
 
-if (!$CI->db->table_exists(db_prefix().ALPHASMS_MODULE_NAME.'_sms')) {
-    $CI->db->query('CREATE TABLE `'.db_prefix().ALPHASMS_MODULE_NAME.'_sms` (
+$CI = &get_instance();
+
+if (!$CI->db->table_exists(db_prefix().SMSAPI_MODULE_NAME.'_sms')) {
+    $CI->db->query('CREATE TABLE `'.db_prefix().SMSAPI_MODULE_NAME.'_sms` (
         `id` INT(11) NOT NULL AUTO_INCREMENT,
         `hash` VARCHAR(32) NOT NULL,
         `testsms` TINYINT(1) NOT NULL DEFAULT 0,
@@ -26,8 +29,10 @@ if (!$CI->db->table_exists(db_prefix().ALPHASMS_MODULE_NAME.'_sms')) {
         UNIQUE KEY `ms_id` (`ms_id`)
     ) ENGINE=InnoDB DEFAULT CHARSET='.$CI->db->char_set.';');
 }
-if (!$CI->db->table_exists(db_prefix().ALPHASMS_MODULE_NAME.'_report')) {
-    $CI->db->query('CREATE TABLE `'.db_prefix().ALPHASMS_MODULE_NAME.'_report` (
+
+if (!$CI->db->table_exists(db_prefix().SMSAPI_MODULE_NAME.'_report')) {
+
+    $CI->db->query('CREATE TABLE `'.db_prefix().SMSAPI_MODULE_NAME.'_report` (
         `id` INT(11) NOT NULL AUTO_INCREMENT,
         `MsgId` VARCHAR(255) NOT NULL,
         `status` INT DEFAULT NULL,
@@ -46,5 +51,5 @@ if (!$CI->db->table_exists(db_prefix().ALPHASMS_MODULE_NAME.'_report')) {
         PRIMARY KEY (`id`),
         UNIQUE KEY `unique_msgid_status` (`MsgId`, `status`, `status_name`)
     ) ENGINE=InnoDB DEFAULT CHARSET='.$CI->db->char_set.';');
+     
 }
-

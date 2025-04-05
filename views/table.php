@@ -16,7 +16,7 @@ $aColumns = [
 ];
 
 $sIndexColumn = 'id';
-$sTable       = db_prefix().ALPHASMS_MODULE_NAME.'_sms';
+$sTable       = db_prefix().SMSAPI_MODULE_NAME.'_sms';
 
 $result = data_tables_init($aColumns, $sIndexColumn, $sTable, $join = [], $where = [], $additionalSelect = ['id'], $sGroupBy = '', $searchAs = []);
 
@@ -29,9 +29,9 @@ foreach ($rResult as $aRow) {
 
     $actions = '';
     $actions .= '<div class="tw-inline-flex">';
-    $actions .= '<a href="#'.ALPHASMS_MODULE_NAME.'_'.$aRow['id'].'" onclick="init_smsapi_item('.$aRow['id'].'); return false;" class="btn btn-default btn-icon btn-sm" data-toggle="tooltip" title="' . _l('view') . '"><i class="fa-eye fa-solid"></i></a>';
+    $actions .= '<a href="#'.SMSAPI_MODULE_NAME.'_'.$aRow['id'].'" onclick="init_smsapi_item('.$aRow['id'].'); return false;" class="btn btn-default btn-icon btn-sm" data-toggle="tooltip" title="' . _l('view') . '"><i class="fa-eye fa-solid"></i></a>';
 
-    if (staff_can('delete', ALPHASMS_MODULE_NAME)) {
+    if (staff_can('delete', SMSAPI_MODULE_NAME)) {
         $actions .= ' <a href="#" onclick="smsapi_item_delete('.$aRow['id'].'); return false;" class="btn btn-danger btn-icon btn-sm _delete" data-toggle="tooltip" title="' . _l('delete') . '"><i class="fa fa-trash-alt"></i></a>';
     }
     $actions .= '</div>';

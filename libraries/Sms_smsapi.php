@@ -3,34 +3,49 @@ defined("BASEPATH") or exit("No direct script access allowed");
 
 class Sms_smsapi extends App_sms
 {
-
+    const api_url_servis = [
+        'pl'    => 'https://api.smsapi.pl/',
+        'com'   => 'https://api.dev.alpha.net.bd/',
+        'se'    => 'https://api.smsapi.se/',
+        'bg'    => 'https://api.smsapi.bg/',
+    ];
     private $apikey;
 	private $from;
+	private $servis;
+	private $fast;
 	private $testsms;
 	private $save_messagess;
-    private $api_url = "http://api.dev.alpha.net.bd/";
+    private $normalize;
+
+    private $api_url = "https://api.dev.alpha.net.bd/";
 
     public function __construct()
     {
         parent::__construct();
+
+       
         
         $this->apikey = $this->get_option("smsapi", "apikey");
         $this->from = $this->get_option("smsapi", "from");
+        $this->servis = $this->get_option("smsapi", "servis");
+        $this->fast = $this->get_option("smsapi", "fast");
         $this->testsms = $this->get_option("smsapi", "testsms");
         $this->save_messagess = $this->get_option("smsapi", "save_messagess");
+        $this->normalize = $this->get_option("smsapi", "normalize");
 
-        $save_messagess_page = $this->save_messagess ? '<div><a class="btn btn-sm btn-warning" href="'.admin_url(ALPHASMS_MODULE_NAME).'"><i class="fa-list-alt fa-regular tw-mr-1"></i>'._l('smsapi_log2').'</a></div>' : '';
+        $save_messagess_page = $this->save_messagess ? '<div><a class="btn btn-sm btn-warning" href="'.admin_url(SMSAPI_MODULE_NAME).'"><i class="fa-list-alt fa-regular tw-mr-1"></i>'._l('smsapi_log2').'</a></div>' : '';
 
         $senderIds = Sms_smsapi::get_sender_ids();
 
         $options = [
+
             [
                 "name" => "apikey",
                 "label" => _l("smsapi_apikey_label"),
-                "info" => _l('smsapi_apikey_info') . "<hr class=\"hr-15\" />",
-            ],
-
-                        [
+                "info" => _l('smsapi_apikey_info')
+            ],    
+     
+            [
                 'name'          => 'save_messagess',
                 'field_type'    => 'radio',
                 'default_value' => '0',
@@ -40,6 +55,11 @@ class Sms_smsapi extends App_sms
                     ['label' => _l('settings_yes'), 'value' => 1],
                     ['label' => _l('settings_no'), 'value' => 0],
                 ],
+            ],
+
+            [
+                'field_type'    => 'info',
+                "info" =>   _l("smsapi_balance_label").": ". Sms_smsapi::get_balance()."</p><hr class=\"hr-15\" />",
             ],
 
             [
@@ -54,10 +74,6 @@ class Sms_smsapi extends App_sms
                 ],
             ],
 
-            [
-                'field_type'    => 'info',
-                "info" =>   _l("smsapi_balance_label").": ". Sms_smsapi::get_balance()."</p><hr class=\"hr-15\" />",
-            ],
         ];
 
         if ($senderIds) {
@@ -83,26 +99,15 @@ class Sms_smsapi extends App_sms
                 ),
             ];
         }
-     
 
         $this->add_gateway("smsapi", [
             "name" => "SMSAPI",
-            "options" => $options,
+            "options" => $options
         ]);
     }
 
     public function send($number, $message)
     {
-
-        $file_path = FCPATH . '/uploads/client_logs.txt';
-
-        // Prepare content
-        $content = "new message send ". date("Y-m-d H:i:s") . "\n";
-
-        // Write to file
-        file_put_contents($file_path, $content, FILE_APPEND | LOCK_EX);
-
-
 
         try {
 
@@ -149,7 +154,7 @@ class Sms_smsapi extends App_sms
 
             if( $this->save_messagess ){
                 $CI = &get_instance();
-                $CI->load->model(ALPHASMS_MODULE_NAME.'/smsapi_model');
+                $CI->load->model(SMSAPI_MODULE_NAME.'/smsapi_model');
                 $addData = [];
             }
 
@@ -208,7 +213,9 @@ class Sms_smsapi extends App_sms
     }
 
 
-    public function get_balance() {
+
+
+    private function get_balance() {
         $data = $this->make_api_request("/user/balance/");
     
         // If the response indicates an error, return the error message
@@ -225,7 +232,7 @@ class Sms_smsapi extends App_sms
         return isset($data['error']) && $data['error'] != 0 ? ($data['msg'] ?? "Invalid API Key") : "Unknown error.";
     }
     
-    public function get_sender_ids() {
+    private function get_sender_ids() {
         $data = $this->make_api_request("/config/senderid/");
     
         // If the response indicates an error, return the error message
@@ -296,5 +303,6 @@ class Sms_smsapi extends App_sms
     
         return $data;
     }
+
     
 }

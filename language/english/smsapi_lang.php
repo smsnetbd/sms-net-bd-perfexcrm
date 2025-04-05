@@ -8,12 +8,13 @@ $lang['smsapi_apikey_label'] = 'API Key';
 $lang['smsapi_apikey_info'] = 'You can find the API Key in your SMSAPI account';
 $lang['smsapi_from_label'] = 'Sender Name';
 $lang['smsapi_from_info'] = 'Enter your sender name defined in the SMSAPI panel. Leaving it empty will result in sending messages with the default signature';
+
+
+$lang['smsapi_balance_label'] ="Balance";
+$lang['smsapi_sender_id_label'] = "Sender ID";
+
+
 $lang['smsapi_servis_label'] = 'SMSAPI Service';
-
-$lang['smsapi_sender_id_label'] = 'Sender ID';
-$lang['smsapi_balance_label'] = 'Balance';
-$lang['no_sender_id'] = 'No sender ID';
-
 $lang['smsapi_servis_option_pl'] = 'Poland %s';
 $lang['smsapi_servis_option_com'] = 'Global %s';
 $lang['smsapi_servis_option_se'] = 'Sweden %s';

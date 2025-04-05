@@ -27,12 +27,12 @@
                     $html = '';
                     if( $sms ){
                         $html .= '<div class="table-responsive">';
-                            $html .= '<table class="table dataTable '.ALPHASMS_MODULE_NAME.' table-hover">';
+                            $html .= '<table class="table dataTable '.SMSAPI_MODULE_NAME.' table-hover">';
 
                                 $html .= '<thead>';
                                     $html .= '<tr role="row">';
-                                        $html .= '<th>'._l(ALPHASMS_MODULE_NAME.'_table_key').'</th>';
-                                        $html .= '<th>'._l(ALPHASMS_MODULE_NAME.'_table_value').'</th>';
+                                        $html .= '<th>'._l(SMSAPI_MODULE_NAME.'_table_key').'</th>';
+                                        $html .= '<th>'._l(SMSAPI_MODULE_NAME.'_table_value').'</th>';
                                     $html .= '</tr>';
                                 $html .= '</thead>';
 
@@ -49,7 +49,7 @@
                                             break;
                                         }
         
-                                        $html .= '<th class="tw-font-medium">'._l(ALPHASMS_MODULE_NAME.'_'.$k).'</th>';
+                                        $html .= '<th class="tw-font-medium">'._l(SMSAPI_MODULE_NAME.'_'.$k).'</th>';
 
                                         $html .= '<th>';
                                             if( is_null($v) || empty($v) ){

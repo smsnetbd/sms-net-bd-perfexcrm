@@ -15,7 +15,7 @@ class Smsapi extends AdminController
             show_404();
         }
 
-        $this->load->model(ALPHASMS_MODULE_NAME.'/smsapi_model');
+        $this->load->model(SMSAPI_MODULE_NAME.'/smsapi_model');
     }
 
     /**
@@ -26,11 +26,11 @@ class Smsapi extends AdminController
      */
     public function index( $id = '' )
     {
-        if (staff_cant('view', ALPHASMS_MODULE_NAME)) {
-            access_denied(ALPHASMS_MODULE_NAME);
+        if (staff_cant('view', SMSAPI_MODULE_NAME)) {
+            access_denied(SMSAPI_MODULE_NAME);
         }
         if ($this->input->is_ajax_request()) {
-            $this->app->get_table_data(module_views_path(ALPHASMS_MODULE_NAME, 'table'));
+            $this->app->get_table_data(module_views_path(SMSAPI_MODULE_NAME, 'table'));
         }
         $this->app_scripts->add('circle-progress-js','assets/plugins/jquery-circle-progress/circle-progress.min.js');
         $data['title'] = _l('smsapi_log');
@@ -47,8 +47,8 @@ class Smsapi extends AdminController
      */
     public function get_item_data_ajax($id)
     {
-        if (staff_cant('view', ALPHASMS_MODULE_NAME) && !$this->input->is_ajax_request() ) {
-            access_denied(ALPHASMS_MODULE_NAME);
+        if (staff_cant('view', SMSAPI_MODULE_NAME) && !$this->input->is_ajax_request() ) {
+            access_denied(SMSAPI_MODULE_NAME);
         }
 
         $sms = $this->smsapi_model->get('sms','id',$id);
@@ -71,9 +71,9 @@ class Smsapi extends AdminController
     public function delete($id): void
     {
         $message = '';
-        if (staff_cant('delete', ALPHASMS_MODULE_NAME) || !$this->input->is_ajax_request()) {
+        if (staff_cant('delete', SMSAPI_MODULE_NAME) || !$this->input->is_ajax_request()) {
             $delete = false;
-            $message = '- '._l(ALPHASMS_MODULE_NAME.'_no_permissions');
+            $message = '- '._l(SMSAPI_MODULE_NAME.'_no_permissions');
         } else {
             $delete = $this->smsapi_model->delete('sms', $id);
         }
@@ -93,6 +93,6 @@ class Smsapi extends AdminController
         } else {
             set_alert('danger', _l('problem_deleting'));
         }
-        redirect(admin_url(ALPHASMS_MODULE_NAME));
+        redirect(admin_url(SMSAPI_MODULE_NAME));
     }
 }

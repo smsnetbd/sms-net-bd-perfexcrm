@@ -3,15 +3,15 @@
 class Smsapi_model extends App_Model
 {
     private const TABLE = [
-        'sms' => ALPHASMS_MODULE_NAME.'_sms',
-        'report' => ALPHASMS_MODULE_NAME.'_report'
+        'sms' => SMSAPI_MODULE_NAME.'_sms',
+        'report' => SMSAPI_MODULE_NAME.'_report'
     ];
     public function __construct()
     {
         parent::__construct();
 
         if( !is_smsapi_save_messages() ){
-            access_denied(ALPHASMS_MODULE_NAME);
+            access_denied(SMSAPI_MODULE_NAME);
         }
     }
 

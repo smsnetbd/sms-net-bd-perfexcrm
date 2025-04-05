@@ -1,76 +1,99 @@
-# Perfex CRM - SMSAPI Module
+# SMS.net.bd Module for Perfex CRM
 
-![SMSAPI + Perfex CRM](./assets/img/banner_smsapi_perfex.png)
+![sms.net.bd + Perfex CRM](./assets/img/sms-net-bd-logo.png)
 
-This module allows you to integrate SMSAPI services with Perfex CRM, enabling you to send SMS notifications directly from your CRM system.
+Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to send SMS notifications, check balance, retrieve delivery reports, and manage SMS seamlessly.
 
-## Available Languages
+## Features
+- Send SMS directly from Perfex CRM  
+- Check SMS balance  
+- Retrieve delivery reports  
+- Easy configuration with API Key  
+- Enable or disable Test Mode  
+- Log sent messages for tracking  
+- **Automated Triggers:**
+  - **Invoice Overdue Notice**: Triggered when an overdue notice is sent to customer contacts.
+  - **Invoice Due Notice**: Triggered when an invoice due notice is sent.
+  - **Invoice Payment Recorded**: Triggered when an invoice payment is recorded.
+  - **Estimate Expiration Reminder**: Triggered when an estimate expiration reminder is sent.
+  - **Proposal Expiration Reminder**: Triggered when a proposal expiration reminder is sent.
+  - **New Comment on Proposal (to Customer)**: Triggered when a staff member comments on a proposal (sent to the customer/lead).
+  - **New Comment on Proposal (to Staff)**: Triggered when a customer/lead comments on a proposal (sent to the creator and assigned staff).
+  - **New Comment on Contract (to Customer)**: Triggered when a staff member adds a comment to a contract (sent to customer contacts).
+  - **New Comment on Contract (to Staff)**: Triggered when a customer adds a comment to a contract (sent to the contract creator).
+  - **Contract Expiration Reminder**: Triggered when a contract expiration reminder is sent via Cron Job.
+  - **Contract Sign Reminder**: Triggered when a contract is first sent and stops automatically once signed.
+  - **Staff Reminder**: Triggered when staff is notified for a specific custom reminder.
 
-The module is available in the following languages:
-
-- <img src="https://github.githubassets.com/images/icons/emoji/unicode/1f1f5-1f1f1.png?v8" alt="Polish" width="18" height="18"/> Polish
-- <img src="https://github.githubassets.com/images/icons/emoji/unicode/1f1ec-1f1e7.png?v8" alt="English" width="18" height="20"/> English
-- <img src="https://github.githubassets.com/images/icons/emoji/unicode/1f1f8-1f1ea.png?v8" alt="Swedish" width="18" height="20"/> Swedish
-- <img src="https://github.githubassets.com/images/icons/emoji/unicode/1f1e7-1f1ec.png?v8" alt="Bulgarian" width="18" height="20"/> Bulgarian
+- **Note: Leave contents blank to disable specific trigger.**
+ 
+## Prerequisites
+- **Perfex CRM** version **3.2.1** or higher
+- **SMS.net.bd** module version **1.0.1**
+- An account on **[sms.net.bd](https://sms.net.bd/signup)**
 
 ## Installation Instructions
 
-1. **Download the Latest Release**
+### 1. Download the Latest Release
+Download the `alphasms.zip` file from the  **[releases](https://github.com/smsnetbd/sms-net-bd-perfexcrm/releases)** page.
 
-   Go to the [Releases](https://github.com/rzietkowski/Perfex-CRM-SMSAPI-Module/releases) page of this repository and download the latest `smsapi.zip` file.
+### 2. Upload the Module
+1. Log in to your **Perfex CRM Admin Panel**.
+2. Navigate to **Setup** > **Modules**.
+3. Choose the **alphasms.zip** file..
+4. Click the Install button and wait for the installation to complete.
 
-2. **Upload the Module**
+### 3. Activate the Module
+1. Locate the module in the list of available modules.
+2. Click **Activate**.
 
-   - Log in to your Perfex CRM admin panel.
-   - Navigate to `Setup` > `Modules`.
-   - Click on the `Upload Module` button.
-   - Upload the `smsapi.zip` file you downloaded in step 1.
+![sms.net.bd + Perfex CRM](./assets/img/screenshot1.png) 
+![sms.net.bd + Perfex CRM](./assets/img/screenshot2.png)
 
-3. **Activate the Module**
+### 4. Configure the Module
+1. Navigate to **Setup** > **Settings** > **SMS** > **SMSAPI**.
+2. Enter your **API Key**.
+3. Configure other settings as required.
 
-   - After uploading, find the module in the list of available modules.
-   - Click on the `Activate` button next to the module.
+![sms.net.bd + Perfex CRM](./assets/img/screenshot3.png)
 
-4. **Configure the Module**
-
-   - Once activated, navigate to `Setup` > `Settings` > `SMS` > `SMSAPI`.
-   - Enter your SMSAPI credentials and configure the settings as needed.
-
-5. **Start Using the Module**
-
-   - You can now start sending SMS notifications from Perfex CRM.
+### 5. Start Using the Module
+You can now send SMS notifications from Perfex CRM.
 
 ## Additional Configuration
 
-1. **API Key Configuration**
+### 1. API Key Setup
+1. Log in to **[sms.net.bd](https://portal.sms.net.bd/login)**.
+2. Navigate to **API Menu** > **+ Generate API Key**.
+3. Copy the generated token and paste it into the **API Key** field in the module settings.
 
-   - Obtain your API key from the SMSAPI panel by navigating to `Settings` > `API Settings` > `API Tokens` > `+ Generate Token`.
-   - Provide a token name of your choice and set the expiration date as needed.
-   - Select the SMS permission and click `Generate Token`.
-   - Copy the generated token and paste it into the API Key field in the module configuration.
+### 2. Sender ID Configuration (Optional)
+1. Log in to **[sms.net.bd](https://portal.sms.net.bd/login)**.
+2. Navigate to **Messaging** > **Create Sender ID**.
+3. Add or select an approved **Sender ID**.
+4. Choose **one** Sender ID in the module settings.
 
-2. **Sender Name Configuration**
+### 3. Test Mode Selection
+- Allows testing SMS functionality before going live.
+- Enable or disable **Test Mode** (`Yes` / `No`).
+- **In test mode:** SMS will be logged but **not sent**.
+- **Before going live, set Test Mode to `No` to enable real SMS sending.**
 
-   - Choose or add a sender name from the SMSAPI panel by navigating to `SMS Messages` > `Sender Fields`.
-   - Select your sender field and copy it.
-   - Paste it into the Sender Name field in the module configuration.
+![sms.net.bd + Perfex CRM](./assets/img/screenshot4.png)
 
-3. **Message Logging**
+### 4. Log Sent Messages
+- Logs all outgoing SMS messages.
+- Enable or disable logging (`Yes` / `No`) in the settings.
+- When enabled, all sent messages will be recorded.
 
-   - This module includes an additional feature for logging messages.
-   - When enabled, it adds a new menu item under `Reports` > `SMSAPI Log`.
-   - This logs sent messages and receives notifications from SMSAPI about message statuses.
+![sms.net.bd + Perfex CRM](./assets/img/screenshot5.png)
+![sms.net.bd + Perfex CRM](./assets/img/screenshot6.png)
 
 ## Troubleshooting
+If you encounter issues, check the following:
 
-If you encounter any issues during installation or usage, please check the following:
+- Ensure you have the correct **permissions** to upload and activate modules.
+- Verify your **API Key** is correct.
+- Check if **Test Mode** is disabled when sending real SMS.
 
-- Ensure that you have the correct permissions to upload and activate modules in Perfex CRM.
-- Verify that your SMSAPI credentials are correct.
-- Check the Perfex CRM documentation for any additional requirements or compatibility issues.
-
-For further assistance, feel free to open an issue on the [GitHub Issues](https://github.com/rzietkowski/Perfex-CRM-SMSAPI-Module/issues) page.
-
-## License
-
-This project is licensed under the Apache License Version 2.0. See the [LICENSE](LICENSE) file for details.
+For further assistance, contact **[sms.net.bd Support](https://sms.net.bd/contact)**.

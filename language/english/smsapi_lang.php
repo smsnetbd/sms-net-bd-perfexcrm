@@ -5,16 +5,15 @@ $lang['smsapi_log'] = 'SMSAPI Log';
 $lang['smsapi_log2'] = 'SMSAPI Log';
 
 $lang['smsapi_apikey_label'] = 'API Key';
-$lang['smsapi_apikey_info'] = 'You can find the API Key in your SMSAPI account';
+$lang['smsapi_apikey_info'] = 'You can find the API Key from <a href="https://portal.sms.net.bd/api" target="_blank">sms.net.bd</a>';
 $lang['smsapi_from_label'] = 'Sender Name';
 $lang['smsapi_from_info'] = 'Enter your sender name defined in the SMSAPI panel. Leaving it empty will result in sending messages with the default signature';
-
-
-$lang['smsapi_balance_label'] ="Balance";
-$lang['smsapi_sender_id_label'] = "Sender ID";
-
-
 $lang['smsapi_servis_label'] = 'SMSAPI Service';
+
+$lang['smsapi_sender_id_label'] = 'Sender ID';
+$lang['smsapi_balance_label'] = 'Balance';
+$lang['no_sender_id'] = 'Default';
+
 $lang['smsapi_servis_option_pl'] = 'Poland %s';
 $lang['smsapi_servis_option_com'] = 'Global %s';
 $lang['smsapi_servis_option_se'] = 'Sweden %s';
@@ -167,23 +166,28 @@ $lang['smsapi_errorcode_2115'] = 'Field with the given name already exists';
 $lang['smsapi_id'] = 'ID';
 $lang['smsapi_item_id'] = 'Record ID';
 $lang['smsapi_hash'] = 'Hash';
-$lang['smsapi_ms_id'] = 'Message ID';
+
+
+// SMS
+
+$lang['smsapi_ms_id'] = 'Message  ID';
+
 $lang['smsapi_testsms'] = 'Test Message';
 $lang['smsapi_error'] = 'Error';
-$lang['smsapi_error_message'] = 'Error Description';
+$lang['smsapi_error_message'] = 'Error Message';
 $lang['smsapi_error_invalid_numbers'] = 'Invalid Numbers';
 $lang['smsapi_ms_status'] = 'Status';
 $lang['smsapi_ms_statuses'] = 'Statuses';
 $lang['smsapi_sms_to'] = 'SMS To';
 $lang['smsapi_sms_from'] = 'SMS From';
+
+$lang['smsapi_request_id'] = 'Request ID';
+
 $lang['smsapi_sms_message'] = 'SMS Content';
 $lang['smsapi_ms_points'] = 'Sending Points';
 $lang['smsapi_ms_number'] = 'Recipient Number with Prefix';
-$lang['smsapi_ms_submitted_number'] = 'Recipient Number Provided in Request';
 $lang['smsapi_created_at'] = 'Created At';
 $lang['smsapi_updated_at'] = 'Updated At';
-$lang['smsapi_ms_date_sent'] = 'Date Sent';
-
 $lang['smsapi_table_switch_view'] = 'Switch View';
 $lang['smsapi_table_key'] = 'Key';
 $lang['smsapi_table_value'] = 'Value';

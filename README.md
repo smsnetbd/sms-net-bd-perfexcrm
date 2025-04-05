@@ -1,4 +1,4 @@
-# SMS.net.bd Module for Perfex CRM
+# sms.net.bd Module for Perfex CRM
 
 ![sms.net.bd + Perfex CRM](./assets/img/sms-net-bd-logo.png)
 
@@ -28,8 +28,8 @@ Easily integrate **[sms.net.bd](https://sms.net.bd)** with **Perfex CRM** to sen
 - **Note: Leave contents blank to disable specific trigger.**
  
 ## Prerequisites
-- **Perfex CRM** version **3.2.1** or higher
-- **SMS.net.bd** module version **1.0.1**
+- **Perfex CRM** version **3.0.0** or higher
+- **sms.net.bd** module version **1.0.1**
 - An account on **[sms.net.bd](https://sms.net.bd/signup)**
 
 ## Installation Instructions

@@ -2,15 +2,15 @@
 defined("BASEPATH") or exit("No direct script access allowed");
 
 /*
-Module Name: SMSAPI
-Description: Send SMS by SMSAPI
-Author: ISCODE
-Author URI: https://iscode.pl
-Version: 1.0.0
+Module Name: ALPHASMS
+Description: Send SMS by Alpha SMS
+Author: sms.net.bd
+Author URI: https://sms.net.bd
+Version: 1.0.1
 Requires at least: 2.9.0
 */
 
-define('SMSAPI_MODULE_NAME', "alphasms");
+define('ALPHASMS_MODULE_NAME', "smsapi");
 
 /**
  * Loads the SMSAPI module helper file and assigns it to the CodeIgniter instance.
@@ -18,25 +18,32 @@ define('SMSAPI_MODULE_NAME', "alphasms");
  * @return void
  */
 $CI = &get_instance();
-$CI->load->helper(SMSAPI_MODULE_NAME. '/'. SMSAPI_MODULE_NAME);
+$CI->load->helper(ALPHASMS_MODULE_NAME. '/'. ALPHASMS_MODULE_NAME);
 
 /*
  * Register activation
  */
-register_activation_hook(SMSAPI_MODULE_NAME, function() {
-	$CI = &get_instance();
+
+register_activation_hook(ALPHASMS_MODULE_NAME, function() {
+
+    $CI = &get_instance();
     require __DIR__ . '/install.php';
+
 });
+
 
 /**
 * Register language files, must be registered if the module is using languages
 */
-register_language_files(SMSAPI_MODULE_NAME, [SMSAPI_MODULE_NAME]);
+
+register_language_files(ALPHASMS_MODULE_NAME, [ALPHASMS_MODULE_NAME]);
 
 /**
  * Module permissions
  */
+
 hooks()->add_action('admin_init', function() {
+
     $capabilities = [];
 
     $capabilities['capabilities'] = [
@@ -44,7 +51,7 @@ hooks()->add_action('admin_init', function() {
         'delete' => _l('permission_delete'),
     ];
 
-    register_staff_capabilities(SMSAPI_MODULE_NAME, $capabilities, _l(SMSAPI_MODULE_NAME.'_log2'));
+    register_staff_capabilities(ALPHASMS_MODULE_NAME, $capabilities, _l(ALPHASMS_MODULE_NAME.'_log2'));
 });
 
 /**
@@ -54,8 +61,8 @@ hooks()->add_action('admin_init', function() {
  * @return array The updated array of SMS gateways.
  */
 hooks()->add_filter('sms_gateways', function($gateways) {
-    if( isset($gateways) && is_array($gateways) && SMSAPI_MODULE_NAME )
-        array_push($gateways, SMSAPI_MODULE_NAME.DIRECTORY_SEPARATOR.'Sms_'.SMSAPI_MODULE_NAME);
+    if( isset($gateways) && is_array($gateways) && ALPHASMS_MODULE_NAME )
+        array_push($gateways, ALPHASMS_MODULE_NAME.DIRECTORY_SEPARATOR.'Sms_'.ALPHASMS_MODULE_NAME);
 
     return $gateways;
 });
@@ -65,7 +72,7 @@ hooks()->add_filter('sms_gateways', function($gateways) {
  * @param  array $actions current actions
  * @return array
  */
-hooks()->add_filter('module_'.SMSAPI_MODULE_NAME.'_action_links', function($actions) {
+hooks()->add_filter('module_'.ALPHASMS_MODULE_NAME.'_action_links', function($actions) {
     $CI = &get_instance();
 
     $support = [
@@ -82,8 +89,8 @@ hooks()->add_filter('module_'.SMSAPI_MODULE_NAME.'_action_links', function($acti
     });
 
     $actions[] = '<a href="'.admin_url('settings?group=sms').'">' . _l('settings') . '</a>';
-    $actions[] = '<a href="https://panel.iscode.pl/forms/ticket?'.http_build_query($support).'" target="_blank" data-toggle="tooltip" title="Contact with the developer"><i class="fa-envelope fa-solid"></i></a>';
-    $actions[] = '<a href="https://github.com/rzietkowski/Perfex-CRM-SMSAPI-Module/issues" target="_blank">' . _l('support') . '</a>';
+
+    $actions[] = '<a href="https://sms.net.bd/Contact/" target="_blank">' . _l('support') . '</a>';
     return $actions;
 });
 
@@ -92,12 +99,12 @@ hooks()->add_filter('module_'.SMSAPI_MODULE_NAME.'_action_links', function($acti
  * @return null
  */
 hooks()->add_action('admin_init', function() {
-    if (staff_can('view',  SMSAPI_MODULE_NAME) && is_smsapi_save_messages() ) {
+    if (staff_can('view',  ALPHASMS_MODULE_NAME) && is_smsapi_save_messages() ) {
         $CI = &get_instance();
         $CI->app_menu->add_sidebar_children_item('utilities', [
-            'slug'     => SMSAPI_MODULE_NAME.'-log',
+            'slug'     => ALPHASMS_MODULE_NAME.'-log',
             'name'     => _l('smsapi_log'),
-            'href'     => admin_url(SMSAPI_MODULE_NAME),
+            'href'     => admin_url(ALPHASMS_MODULE_NAME),
             'position' => 30,
         ]);
     }

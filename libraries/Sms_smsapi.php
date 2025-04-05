@@ -3,63 +3,57 @@ defined("BASEPATH") or exit("No direct script access allowed");
 
 class Sms_smsapi extends App_sms
 {
-    const api_url_servis = [
-        'pl'    => 'https://api.smsapi.pl/',
-        'com'   => 'https://api.dev.alpha.net.bd/',
-        'se'    => 'https://api.smsapi.se/',
-        'bg'    => 'https://api.smsapi.bg/',
-    ];
-    private $apikey;
-	private $from;
-	private $servis;
-	private $fast;
-	private $testsms;
-	private $save_messagess;
-    private $normalize;
 
-    private $api_url = "https://api.dev.alpha.net.bd/";
+    private $apikey;
+    private $from;
+    private $testsms;
+    private $save_messagess;
+    private $balance;
+    private $sender_ids;
+    private $api_url;
+    
 
     public function __construct()
     {
         parent::__construct();
 
-       
-        
         $this->apikey = $this->get_option("smsapi", "apikey");
+
         $this->from = $this->get_option("smsapi", "from");
-        $this->servis = $this->get_option("smsapi", "servis");
-        $this->fast = $this->get_option("smsapi", "fast");
+
         $this->testsms = $this->get_option("smsapi", "testsms");
+
         $this->save_messagess = $this->get_option("smsapi", "save_messagess");
-        $this->normalize = $this->get_option("smsapi", "normalize");
 
-        $save_messagess_page = $this->save_messagess ? '<div><a class="btn btn-sm btn-warning" href="'.admin_url(SMSAPI_MODULE_NAME).'"><i class="fa-list-alt fa-regular tw-mr-1"></i>'._l('smsapi_log2').'</a></div>' : '';
+        update_option('sms_smsapi_active', '1');
 
-        $senderIds = Sms_smsapi::get_sender_ids();
+        $this->api_url = api_url();
+
+        $this->balance = get_balance($this->apikey);
+        
+        $this->sender_ids = get_sender_ids($this->apikey);
+        
+        $save_messagess_page = $this->save_messagess ? '<div><a class="btn btn-sm btn-warning" href="' . admin_url(ALPHASMS_MODULE_NAME) . '"><i class="fa-list-alt fa-regular tw-mr-1"></i>' . _l('smsapi_log2') . '</a></div>' : '';
+
 
         $options = [
 
             [
                 "name" => "apikey",
                 "label" => _l("smsapi_apikey_label"),
-                "info" => _l('smsapi_apikey_info')
-            ],    
-     
+                "info" => _l('smsapi_apikey_info') . "<hr class=\"hr-15\" />",
+            ],
+
             [
                 'name'          => 'save_messagess',
                 'field_type'    => 'radio',
-                'default_value' => '0',
+                'default_value' => '1',
                 'label'         => _l("smsapi_save_messagess_label"),
-                "info" => "<p>"._l("smsapi_save_messagess_info",$save_messagess_page)."</p><hr class=\"hr-15\" />",
+                "info" => "<p>" . _l("smsapi_save_messagess_info", $save_messagess_page) . "</p><hr class=\"hr-15\" />",
                 'options'       => [
                     ['label' => _l('settings_yes'), 'value' => 1],
                     ['label' => _l('settings_no'), 'value' => 0],
                 ],
-            ],
-
-            [
-                'field_type'    => 'info',
-                "info" =>   _l("smsapi_balance_label").": ". Sms_smsapi::get_balance()."</p><hr class=\"hr-15\" />",
             ],
 
             [
@@ -67,16 +61,22 @@ class Sms_smsapi extends App_sms
                 'field_type'    => 'radio',
                 'default_value' => '0',
                 'label'         => _l("smsapi_testsms_label"),
-                "info" => "<p>"._l("smsapi_testsms_info")."</p><hr class=\"hr-15\" />",
+                "info" => "",
                 'options'       => [
                     ['label' => _l('settings_yes'), 'value' => 1],
                     ['label' => _l('settings_no'), 'value' => 0],
                 ],
             ],
 
+            [
+                'name'          => 'balance',
+                'field_type'    => 'info',
+                "info" =>   _l("smsapi_balance_label") . ": " . $this->balance . "</p><hr class=\"hr-15\" />",
+            ],
+
         ];
 
-        if ($senderIds) {
+        if ($this->sender_ids) {
             $options[] = [
                 'name'          => 'from',
                 'field_type'    => 'radio',
@@ -86,8 +86,9 @@ class Sms_smsapi extends App_sms
                 'options'       => array_merge(
                     [
                         [
-                            'label' => _l('no_sender_id'), // Default option
-                            'value' => 'no_sender_id',
+                            'label'   => _l('no_sender_id'), // Default option
+                            'value'   => 'default',
+                            'checked' => true // Ensuring default is selected
                         ]
                     ],
                     array_map(function ($sender) {
@@ -95,214 +96,110 @@ class Sms_smsapi extends App_sms
                             'label' => $sender['sender_id'],
                             'value' => $sender['sender_id']
                         ];
-                    }, $senderIds)
+                    }, $this->sender_ids)
                 ),
             ];
+        }else{
+            $options[] = [
+                'name'          => 'from',
+                'field_type'    => 'radio',
+                'default_value' => 'default',
+                'label'         => _l("smsapi_sender_id_label"),
+                "info"          => "<hr class=\"hr-15\" />",
+                "options" => [
+                    [
+                        'label'   => _l('no_sender_id'), // Default option
+                        'value'   => 'default',
+                        'checked' => true // Ensuring default is selected
+                    ]
+                ],
+            ];
         }
+        
 
         $this->add_gateway("smsapi", [
             "name" => "SMSAPI",
-            "options" => $options
+            "options" => $options,
         ]);
     }
 
     public function send($number, $message)
     {
-
         try {
-
             $sendData = [
                 'api_key' => $this->apikey,
                 'msg' => $message,
                 'to' => $number,
             ];
-
-            // Sender Id check in database
-            if ($this->from && in_array($this->from, array_column($this->get_sender_ids(), 'sender_id'))) {
+    
+            if ($this->from && in_array($this->from, array_column($this->sender_ids, 'sender_id'))) {
                 $sendData['sender_id'] = $this->from;
             }
-
+    
             if ($this->save_messagess) {
                 $sms_hash = app_generate_hash();
                 $sendData['notify_url'] = site_url("smsapi/reports/{$sms_hash}");
             }
-
-            $response = $this->client->request(
-                'POST', $this->api_url.'sendsms', [
+    
+            $response = $this->client->request('POST', $this->api_url . 'sendsms', [
                 'form_params' => $sendData,
-                'headers' => [
-                    'Content-Type' => 'application/x-www-form-urlencoded'
-                ],
+                'headers' => ['Content-Type' => 'application/x-www-form-urlencoded'],
                 'http_errors' => false
             ]);
-
-            $send = json_decode($response->getBody()->getContents(), true);
-            
+    
             $statusCode = $response->getStatusCode();
+            $send = json_decode($response->getBody()->getContents(), true);
+            $api_log = json_encode($send, JSON_UNESCAPED_UNICODE);
+    
+            if ($this->save_messagess) {
 
-            if( isset($send["error"]) ){
-                $send['error_message'] = _l("smsapi_errorcode_{$send["error"]}");
-            }
-
-            if( isset($send['count']) && $send['count'] > 0 && isset($send['list']) ){
-                foreach( $send['list'] as &$item ){
-                    $item['status_message'] = _l("smsapi_status_{$item['status']}");
-                }
-            }
-
-            $api_log = json_encode( $send, JSON_UNESCAPED_UNICODE );
-
-            if( $this->save_messagess ){
                 $CI = &get_instance();
-                $CI->load->model(SMSAPI_MODULE_NAME.'/smsapi_model');
-                $addData = [];
+
+                $CI->load->model(ALPHASMS_MODULE_NAME . '/smsapi_model');
+
+               $send['msg'] = (isset($send['error']) && $send['error'] == 0) ? null :  $send['msg'];
+
+               $this->saveMessageLog($CI->smsapi_model, $sms_hash, $number, $message, $send);
+
             }
+    
 
-            if ($statusCode == 200 ) {
-                if( !isset($send["error"]) && isset($send['count']) && $send['count'] > 0 ){
-                    if( $this->save_messagess ){
-                        foreach( $send['list'] as $item ){
-                            $CI->smsapi_model->add('sms', [
-                                'hash' => $sms_hash,
-                                'testsms' => $this->testsms,
-                                'sms_to' => $number,
-                                'sms_from' => $this->from ?? null,
-                                'sms_message' => $message,
-                                'error' => $send['error'] ?? null,
-                                'ms_id' => $send['data']['request_id'] ?? null,
-                                'ms_points' => $item['points'],
-                                'ms_number' => $item['number'],
-                                'ms_date_sent' => $item['date_sent'],
-                                'ms_submitted_number' => $item['submitted_number'],
-                                'ms_status' => $item['status'],
-                            ]);
-                        }
-                    }
-                    $this->logSuccess($number, "{$message}, API_LOG:{$api_log}, StatusCode:{$statusCode}");
-                    return true;
-                }else{
-
-                    if( $this->save_messagess ){
-                        $CI->smsapi_model->add('sms', [
-                            'hash' => $sms_hash,
-                            'testsms' => $this->testsms,
-                            'sms_to' => $number,
-                            'sms_from' => $this->from ?? null,
-                            'sms_message' => $message,
-                            'error' => $send['error'] ?? null,
-                            'error_message' => $send['message'] ?? null,
-                            'ms_id' => $send['data']['request_id'] ?? null,
-                            'error_invalid_numbers' => $send['invalid_numbers'] ?? null
-                        ]);
-                    }
-
-                    $this->set_error("Message:{$message}, To:{$number}, API_LOG:{$api_log}, StatusCode:{$statusCode}");
-                    return false;
-                }
-                
+            if ($statusCode == 200 && isset($send["error"]) && $send["error"] == 0) {
+                $this->logSuccess($number, "{$message}, API_LOG:{$api_log}, StatusCode:{$statusCode}");
+                return true;
             } else {
                 $this->set_error("Message:{$message}, To:{$number}, API_LOG:{$api_log}, StatusCode:{$statusCode}");
                 return false;
             }
 
 
-        } catch (Exception $e) {
-            $this->set_error($e->getMessage());
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+
+            $this->set_error("HTTP Request Failed: " . $e->getMessage());
             return false;
+
+        } catch (Exception $e) {
+
+            $this->set_error("Unexpected Error: " . $e->getMessage());
+            return false;
+
         }
     }
-
-
-
-
-    private function get_balance() {
-        $data = $this->make_api_request("/user/balance/");
     
-        // If the response indicates an error, return the error message
-        if (is_string($data)) {
-            return $data;
-        }
-    
-        // Check if balance exists in the response
-        if (isset($data['data']['balance'])) {
-            return  $this->formatBDT($data['data']['balance']);
-        }
-    
-        // Handle API errors
-        return isset($data['error']) && $data['error'] != 0 ? ($data['msg'] ?? "Invalid API Key") : "Unknown error.";
-    }
-    
-    private function get_sender_ids() {
-        $data = $this->make_api_request("/config/senderid/");
-    
-        // If the response indicates an error, return the error message
-        if (is_string($data)) {
-            return $data;
-        }
-    
-        // Handle API errors
-        return $data['data']['items'] ?? "No sender IDs available.";
-    }
-
-    private function formatBDT($amount) {
-        $amount = number_format($amount, 2, '.', ','); 
-        $parts = explode('.', $amount); // Split integer and decimal parts
-    
-        $integerPart = $parts[0];
-        $decimalPart = isset($parts[1]) ? $parts[1] : '00';
-    
-        // Apply Bangladeshi comma formatting
-        $integerPart = preg_replace('/\B(?=(\d{2}){1,3}\b)/', ',', $integerPart);
-    
-        return $integerPart . '.' . $decimalPart . ' BDT'; // Append "BDT"
-    }
-
-    private function make_api_request($endpoint) {
-        // Ensure the API URL is set correctly
-        if (!isset($this->api_url)) {
-            return "Invalid API service selected.";
-        }
-    
-        $apiUrl = $this->api_url . $endpoint;
-    
-        $params = [
-            "api_key" => $this->apikey
-        ];
-    
-        $ch = curl_init();
-        curl_setopt_array($ch, [
-            CURLOPT_URL => $apiUrl . '?' . http_build_query($params),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 10,
-            CURLOPT_SSL_VERIFYPEER => false,  // Ignore SSL verification (not recommended for production)
-            CURLOPT_SSL_VERIFYHOST => false
+    private function saveMessageLog($smsapi_model, $sms_hash, $number, $message, $send)
+    {
+        $smsapi_model->add('sms', [
+            'hash' => $sms_hash,
+            'testsms' => $this->testsms,
+            'sms_from' => $this->from ?? null,
+            'sms_to' => $number,
+            'sms_message' => $message,
+            'error' => $send['error'] ?? null,
+            'error_message' => $send['msg'] ?? null,
+            'request_id' => $send['data']['request_id'] ?? null,
         ]);
-    
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $curlError = curl_error($ch);
-        curl_close($ch);
-    
-        // Handle cURL errors
-        if ($response === false) {
-            return "cURL Error: $curlError";
-        }
-    
-        // Decode JSON response
-        $data = json_decode($response, true);
-    
-        // Handle invalid JSON response
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            return "Invalid response format from API.";
-        }
-    
-        // Handle HTTP errors (e.g., 404 Not Found)
-        if ($httpCode !== 200) {
-            return "Error: HTTP $httpCode - " . ($data['msg'] ?? 'Unknown error');
-        }
-    
-        return $data;
     }
-
     
+
+
 }
